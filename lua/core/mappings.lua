@@ -96,6 +96,12 @@ M.fugitive = {
       end,
       "Get change from buffer 2"
     },
+    ["<leader>md"] = {
+      function ()
+        vim.cmd("Gwrite")
+      end,
+      "Complete git merge"
+    },
     ["<leader>gs"] = {
       function ()
         vim.cmd("Git status")
