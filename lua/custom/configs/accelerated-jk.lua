@@ -1,5 +1,4 @@
 local present, accelerated_jk = pcall(require, "accelerated-jk")
-print(present)
 
 if not present then
   return

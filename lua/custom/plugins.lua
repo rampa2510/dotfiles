@@ -7,6 +7,10 @@ local plugins = {
   --   end
   -- },
   {
+    "christoomey/vim-tmux-navigator",
+    lazy = false
+  },
+  {
     "mhartington/formatter.nvim",
     event = "VeryLazy",
     opts = function()
@@ -62,11 +66,7 @@ local plugins = {
     },
     event = "BufReadPost",
     config = function()
-      require("ufo").setup {
-        provider_selector = function()
-          return { "treesitter", "indent" }
-        end,
-      }
+      require "custom.configs.ufo"
     end,
   },
   {
