@@ -23,6 +23,8 @@ local plugins = {
       ensure_installed={
         "prettier",
         "typescript-language-server",
+        "html-lsp",
+        "tailwindcss-language-server "
       }
     }
   },
