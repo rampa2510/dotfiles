@@ -1,8 +1,10 @@
 local config = require("plugins.configs.lspconfig")
 local on_attach = config.on_attach
 local capabilities = config.capabilities
+local gofmt = require("custom.configs.goformat")
 
 local lspconfig = require("lspconfig")
+local util = require "lspconfig/util"
 
 local function organize_imports()
   local params = {
@@ -26,4 +28,40 @@ lspconfig.tsserver.setup {
       description = "Organize Imports",
     }
   },
+}
+
+lspconfig.gopls.setup {
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+    gofmt.setup()
+  end,
+  capabilities = capabilities,
+  cmd = {"gopls"},
+  filetypes = {"go","gomod","gowork","gotmpl"},
+  root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+  settings = {
+    gopls = {
+      completeUnimported = true,
+      usePlaceholders = true,
+      gofumpt = true,
+      analyses = {
+        unusedparams = true,
+        unusedvariable = true,
+        unreachable = true
+      }
+    },
+  },
+}
+
+lspconfig.ruby_ls.setup({
+  on_attach = function(client, buffer)
+    Setup_ruby_diagnostics(client, buffer)
+  end,
+})
+
+lspconfig.tailwindcss.setup {
+  cmd = { "tailwindcss-language-server", "--stdio" },
+  filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+  root_dir = lspconfig.util.root_pattern("tailwind.config.js", "package.json"),
+  settings = {},
 }

@@ -118,6 +118,21 @@ M.fugitive = {
   }
 }
 
+M.gopher = {
+  n = {
+    ["<leader>gt"] = {
+      function ()
+        vim.cmd("GoTagAdd json")
+      end
+    },
+    ["<leader>gie"] = {
+      function ()
+        vim.cmd("GoIfErr")
+      end
+    }
+  }
+}
+
 M.tabufline = {
   plugin = true,
 
@@ -324,7 +339,7 @@ M.telescope = {
 
     -- git
     ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
-    ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "Git status" },
+    -- ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "Git status" },
 
     -- pick a hidden term
     ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "Pick hidden term" },
