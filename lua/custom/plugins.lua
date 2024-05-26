@@ -26,7 +26,9 @@ local plugins = {
         "html-lsp",
         "tailwindcss-language-server",
         "gopls",
-        "ruby-lsp"
+        "ruby-lsp",
+        "rubocop",
+        "solargraph"
       }
     }
   },

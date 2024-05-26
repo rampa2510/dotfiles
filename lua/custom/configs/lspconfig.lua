@@ -59,6 +59,53 @@ lspconfig.ruby_ls.setup({
   end,
 })
 
+-- lspconfig.rubocop.setup({
+--   on_attach = function(client, bufnr)
+--     on_attach(client, bufnr)
+--     vim.opt.signcolumn = "yes"
+--     vim.api.nvim_create_autocmd("FileType", {
+--       pattern = "ruby",
+--       callback = function()
+--         vim.lsp.start {
+--           name = "rubocop",
+--           cmd = { "bundle", "exec", "rubocop", "--lsp" },
+--         }
+--       end,
+--     })
+--
+--     vim.api.nvim_create_autocmd("BufWritePre", {
+--       pattern = "*.rb",
+--       callback = function()
+--         vim.lsp.buf.format()
+--       end,
+--     })
+--   end,
+--   capabilities = capabilities,
+--   filetypes = { "ruby" },
+--   init_options = {
+--     command = { "rubocop" },
+--     formatCommand = { "rubocop", "--auto-correct", "--stdin", "%" },
+--     lintCommand = { "rubocop", "--format", "emacs", "--stdin", "%" },
+--   },
+--   root_dir = lspconfig.util.root_pattern(".rubocop.yml",".git")
+-- })
+--
+
+lspconfig.solargraph.setup({
+  on_attach = function (client,bufnr)
+    on_attach(client,bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = "*.rb",
+      callback = function()
+        vim.lsp.buf.format()
+      end,
+    })
+
+  end,
+  capabilities = capabilities,
+  root_dir = lspconfig.util.root_pattern('.solargraph.yml')
+})
+
 lspconfig.tailwindcss.setup {
   cmd = { "tailwindcss-language-server", "--stdio" },
   filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
